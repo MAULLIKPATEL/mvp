@@ -8,7 +8,7 @@ from pyrogram import Client, filters
 from database.users_chats_db import db
 
 @Client.on_message(filters.private & filters.command(['seethumb']))
-async def viewthumb(client, message):    
+async def seethumb(client, message):    
     thumb = await db.get_thumbnail(message.from_user.id)
     if thumb:
        await client.send_photo(
