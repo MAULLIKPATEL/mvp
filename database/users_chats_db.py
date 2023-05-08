@@ -205,6 +205,13 @@ class Database:
         except Exception as e:
             print(e)
 
+    async def set_caption(self, id, caption):
+        await self.col.update_one({'id': int(id)}, {'$set': {'caption': caption}})
+
+    async def get_caption(self, id):
+        user = await self.col.find_one({'id': int(id)})
+        return user.get('caption', None)
+
 
 db = Database(DATABASE_URI, DATABASE_NAME)
 chat_db = ChatDatabase(DATABASE_URI, "ShortenerChatsDB")
